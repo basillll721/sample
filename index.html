@@ -1,147 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Entrepreneur Video Rooms</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-    }
-    header {
-      background: #111;
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .google-login {
-      background: white;
-      color: #333;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .main {
-      padding: 20px;
-    }
-    .create-room {
-      margin-bottom: 20px;
-    }
-    .create-room input {
-      padding: 10px;
-      width: 250px;
-      margin-right: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .create-room button {
-      padding: 10px 15px;
-      background: #007bff;
-      border: none;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .room-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-    .room-card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.08);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .room-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .join-btn {
-      background: #28a745;
-      color: white;
-      padding: 8px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      align-self: start;
-    }
-  </style>
-</head>
-<body>
 
-<header>
-  <h2>Entrepreneur Video Call</h2>
-  <button class="google-login" onclick="googleLogin()">Sign in with Google</button>
-</header>
+// Landing page for StartupSphere
+import HeroSection from "@/components/HeroSection";
+import RoomsGrid from "@/components/RoomsGrid";
+import HowItWorks from "@/components/HowItWorks";
+import CommunityHighlights from "@/components/CommunityHighlights";
+import StickyCTA from "@/components/StickyCTA";
 
-<div class="main">
-  <div class="create-room">
-    <input type="text" id="roomName" placeholder="Enter Room Name" />
-    <button onclick="createRoom()">Create Room</button>
-  </div>
+const Index = () => (
+  <main className="w-full min-h-screen relative">
+    <HeroSection />
+    <RoomsGrid />
+    <HowItWorks />
+    <CommunityHighlights />
+    <StickyCTA />
+    <footer className="py-8 text-center text-sm text-white/60 font-medium tracking-wide mt-20">
+      © {new Date().getFullYear()} StartupSphere · Connect • Create • Grow
+    </footer>
+  </main>
+);
 
-  <div class="room-list" id="roomList">
-    <!-- Rooms will be listed here -->
-  </div>
-</div>
-
-<script>
-  const roomListDiv = document.getElementById('roomList');
-
-  function googleLogin() {
-    alert('Google Sign-In goes here (connect Firebase/Auth0 later)');
-  }
-
-  function createRoom() {
-    const name = document.getElementById('roomName').value.trim();
-    if (!name) {
-      alert("Room name can't be empty");
-      return;
-    }
-
-    const rooms = JSON.parse(localStorage.getItem('rooms') || '[]');
-    rooms.push({ id: Date.now(), title: name });
-    localStorage.setItem('rooms', JSON.stringify(rooms));
-    document.getElementById('roomName').value = '';
-    renderRooms();
-  }
-
-  function renderRooms() {
-    const rooms = JSON.parse(localStorage.getItem('rooms') || '[]');
-    roomListDiv.innerHTML = '';
-    rooms.forEach(room => {
-      const div = document.createElement('div');
-      div.className = 'room-card';
-      div.innerHTML = `
-        <div class="room-title">${room.title}</div>
-        <button class="join-btn" onclick="joinRoom('${room.id}')">Join</button>
-      `;
-      roomListDiv.appendChild(div);
-    });
-  }
-
-  function joinRoom(id) {
-    alert(`Redirecting to room ID: ${id}`);
-    // Later, redirect to `/room/${id}` or a WebRTC call room
-  }
-
-  // Initial load
-  renderRooms();
-</script>
-
-</body>
-</html>
+export default Index;
