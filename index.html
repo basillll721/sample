@@ -1,22 +1,17 @@
 
-// Landing page for StartupSphere
-import HeroSection from "@/components/HeroSection";
-import RoomsGrid from "@/components/RoomsGrid";
-import HowItWorks from "@/components/HowItWorks";
-import CommunityHighlights from "@/components/CommunityHighlights";
-import StickyCTA from "@/components/StickyCTA";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-const Index = () => (
-  <main className="w-full min-h-screen relative">
-    <HeroSection />
-    <RoomsGrid />
-    <HowItWorks />
-    <CommunityHighlights />
-    <StickyCTA />
-    <footer className="py-8 text-center text-sm text-white/60 font-medium tracking-wide mt-20">
-      © {new Date().getFullYear()} StartupSphere · Connect • Create • Grow
-    </footer>
-  </main>
-);
+body {
+  @apply font-inter bg-startup-gradient bg-no-repeat bg-cover min-h-screen text-white;
+}
 
-export default Index;
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: rgba(103,41,255,0.15);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(32,207,255,0.22);
+  border-radius: 4px;
+}
